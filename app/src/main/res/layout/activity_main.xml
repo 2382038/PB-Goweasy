@@ -1,19 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
+    <!-- Header Title -->
+
+    <ImageView
+        android:id="@+id/logo_bike"
+        android:layout_width="144dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="Logo Goweasy" />
+
     <TextView
+        android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="32dp"
+        android:text="Goweasy"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#1565C0"
+        android:layout_centerHorizontal="true" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btn_search_bike"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_text"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="122dp"
+        android:backgroundTint="#1E88E5"
+        android:text="Cari Sepeda"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btn_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_scan_qr"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#1565C0"
+        android:text="Histori Sewa"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btn_help_safety"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_history"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#0D47A1"
+        android:text="Bantuan Keamanan"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btn_scan_qr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_search_bike"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#1976D2"
+        android:text="Scan QR untuk Sewa"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>
