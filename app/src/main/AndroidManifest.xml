@@ -13,6 +13,16 @@
         android:theme="@style/Theme.FinalGoweasyApp"
         tools:targetApi="31">
         <activity
+            android:name=".ItemHistoriSewa"
+            android:exported="false"
+            android:theme="@style/Theme.FinalGoweasyApp" />
+        <activity
+            android:name=".HistoriSewa"
+            android:exported="false" />
+        <activity
+            android:name=".Histori_Sewa"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
