@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
@@ -8,7 +7,6 @@
     tools:context=".MainActivity">
 
     <!-- Header Title -->
-
     <ImageView
         android:id="@+id/logo_bike"
         android:layout_width="144dp"
@@ -27,6 +25,7 @@
         android:textColor="#1565C0"
         android:layout_centerHorizontal="true" />
 
+    <!-- Button Cari Sepeda -->
     <Button
         android:id="@+id/btn_search_bike"
         android:layout_width="match_parent"
@@ -38,26 +37,16 @@
         android:text="Cari Sepeda"
         android:textColor="#FFFFFF" />
 
+    <!-- Button Histori Sewa -->
     <Button
         android:id="@+id/btn_history"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_scan_qr"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#1565C0"
-        android:text="Histori Sewa"
-        android:textColor="#FFFFFF" />
-
-    <Button
-        android:id="@+id/btn_scan_qr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_search_bike"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="#1976D2"
-        android:text="Scan QR untuk Sewa"
+        android:backgroundTint="#1565C0"
+        android:text="Histori Sewa"
         android:textColor="#FFFFFF" />
 
 </RelativeLayout>

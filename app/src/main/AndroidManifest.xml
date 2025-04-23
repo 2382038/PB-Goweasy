@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.final_goweasyapp">
 
     <application
         android:allowBackup="true"
@@ -13,15 +14,9 @@
         android:theme="@style/Theme.FinalGoweasyApp"
         tools:targetApi="31">
         <activity
-            android:name=".ItemHistoriSewa"
-            android:exported="false"
-            android:theme="@style/Theme.FinalGoweasyApp" />
-        <activity
-            android:name=".HistoriSewa"
+            android:name=".HisotriSewa"
             android:exported="false" />
-        <activity
-            android:name=".Histori_Sewa"
-            android:exported="false" />
+        <!-- Activity utama (halaman awal) -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -30,7 +25,21 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity> <!-- Halaman cari sepeda -->
+        <activity
+            android:name=".CariSepeda"
+            android:exported="false" /> <!-- Halaman penyewaan -->
+        <activity
+            android:name=".Penyewaan"
+            android:exported="false" /> <!-- Halaman histori sewa -->
+        <activity
+            android:name=".HistoriSewa"
+            android:exported="false" /> <!-- Adapter untuk histori sewa (tidak perlu didaftarkan karena bukan activity) -->
+        <!-- <activity android:name=".RentalHistoryAdapter" /> -->
+        <!-- Halaman tampilan struk -->
+        <activity
+            android:name=".Struk"
+            android:exported="false" />
     </application>
 
 </manifest>

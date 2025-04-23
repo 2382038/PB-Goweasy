@@ -4,36 +4,44 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnSearchBike;
-    private Button btnHistory;
-    private Button btnScanQR;
+    Button btnSearchBike, btnHistory;
+    ImageView logoBike;
+    TextView titleText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Inisialisasi view
         btnSearchBike = findViewById(R.id.btn_search_bike);
         btnHistory = findViewById(R.id.btn_history);
-        btnScanQR = findViewById(R.id.btn_scan_qr);
+        logoBike = findViewById(R.id.logo_bike);
+        titleText = findViewById(R.id.title_text);
 
-        // OnClickListeners
-        btnSearchBike.setOnClickListener(view -> {
-            // Logic for searching bike
+        // Klik tombol Cari Sepeda
+        btnSearchBike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CariSepeda.class);
+                startActivity(intent);
+            }
         });
 
-        btnHistory.setOnClickListener(view -> {
-            // Logic for opening rental history
-        });
-
-        btnScanQR.setOnClickListener(view -> {
-            // Open QR Scanner Activity
-            Intent intent = new Intent(MainActivity.this, ScanQRActivity.class);
-            startActivity(intent);
+        // Klik tombol Histori Sewa
+        btnHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HistoriSewa.class);
+                startActivity(intent);
+            }
         });
     }
 }

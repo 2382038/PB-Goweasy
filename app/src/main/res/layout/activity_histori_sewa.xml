@@ -1,61 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_histori"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistoriSewa"
-    android:background="#F8F8F8">
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:padding="16dp">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tbDetailSepeda"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#D9E2FF"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-
-
-    <ImageView
-        android:id="@+id/btn_back"
-        android:layout_width="37dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="Back"
-        android:src="@drawable/ic_back_foreground"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Judul -->
+    <!-- Judul halaman -->
     <TextView
-        android:id="@+id/txt_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Histori Penyewaan"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#3D004D"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_back"
-        app:layout_constraintBottom_toBottomOf="@id/btn_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
 
-    <!-- RecyclerView untuk histori (diisi dari database) -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewHistori"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:clipToPadding="false" />
+    <!-- Container histori sewa -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/container_histori"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- Data histori akan ditambahkan di sini dari Java -->
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

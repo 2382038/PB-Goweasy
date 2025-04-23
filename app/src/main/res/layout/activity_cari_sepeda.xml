@@ -5,7 +5,7 @@
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tbInfoSepeda"
+        android:id="@+id/tbDetailSepeda"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#D9E2FF"
@@ -14,49 +14,143 @@
     <!-- Back Button -->
     <ImageView
         android:id="@+id/btn_back"
-        android:layout_width="37dp"
-        android:layout_height="40dp"
-        android:layout_alignTop="@+id/tbInfoSepeda"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignTop="@id/tbDetailSepeda"
+        android:layout_alignStart="@id/tbDetailSepeda"
+        android:layout_margin="16dp"
         android:contentDescription="Back"
         android:src="@drawable/ic_back_foreground" />
 
     <!-- Title -->
-
-    <!-- Content Section with ListView -->
-
     <TextView
         android:id="@+id/txt_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/btn_back"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:layout_toEndOf="@id/btn_back"
-        android:text="Sepeda Terdekat"
-        android:textColor="@color/black"
+        android:text="Sepeda"
+        android:textColor="@android:color/holo_blue_dark"
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <LinearLayout
+    <!-- Content -->
+    <ScrollView
+        android:id="@+id/scroll_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tbInfoSepeda"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        android:orientation="vertical"
-        android:paddingBottom="16dp">
+        android:layout_below="@id/tbDetailSepeda"
+        android:padding="8dp">
 
-        <ListView
-            android:id="@+id/listView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <!-- Item 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:background="@android:color/white"
+                android:elevation="2dp"
+                android:layout_marginBottom="12dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sepeda Listrik"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tahun 2020"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Warna Merah"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Rp 50.000 / 1 Jam"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Item 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:background="@android:color/white"
+                android:elevation="2dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sepeda Gunung"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tahun 2020"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+ Sepeda"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp 100.000 / 5 Jam"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <!-- Sewa Sekarang Button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center">
+
+                <Button
+                    android:onClick="hal_sewa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sewa Sekarang"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
