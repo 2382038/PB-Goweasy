@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Cek apakah sudah login atau belum
-        SharedPreferences sharedPref = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        boolean isLoggedIn = sharedPref.getBoolean(KEY_IS_LOGGED_IN, false);
+        boolean isLoggedIn = getIntent().getBooleanExtra("is_logged_in", false);
 
         if (!isLoggedIn) {
             // Belum login, pindah ke LoginActivity
@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
+
+        String idUser = getIntent().getStringExtra("id_user");
 
         setContentView(R.layout.activity_main);
 
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CariSepeda.class);
+                intent.putExtra("id_user", idUser);
                 startActivity(intent);
             }
         });
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, HistoriSewa.class);
+                intent.putExtra("id_user", idUser);
                 startActivity(intent);
             }
         });

@@ -11,6 +11,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
 public class Register extends AppCompatActivity {
 
     EditText editTextUsernameRegister, editTextPasswordRegister, editTextConfirmPassword;
@@ -43,19 +50,52 @@ public class Register extends AppCompatActivity {
                 } else if (!password.equals(confirmPassword)) {
                     Toast.makeText(Register.this, "Password dan Konfirmasi Password tidak cocok", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Simpan username dan password ke SharedPreferences
-                    SharedPreferences sharedPref = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString(KEY_USERNAME, username);
-                    editor.putString(KEY_PASSWORD, password);
-                    editor.putBoolean(KEY_IS_LOGGED_IN, true); // langsung login setelah register
-                    editor.apply();
+                    // Simpan username dan password ke Database
+                    new Thread(() -> {
+                        try {
+                            URL url = new URL("http://10.8.14.82/android/goweasy/register.php"); // ganti nama file php kalau perlu
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST");
+                            conn.setDoOutput(true);
+                            conn.setDoInput(true);
 
-                    Toast.makeText(Register.this, "Registrasi berhasil!", Toast.LENGTH_SHORT).show();
+                            String data = "username=" + URLEncoder.encode(username, "UTF-8")
+                                    + "&password=" + URLEncoder.encode(password, "UTF-8");
 
-                    Intent intent = new Intent(Register.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                            OutputStream os = conn.getOutputStream();
+                            os.write(data.getBytes());
+                            os.flush();
+                            os.close();
+
+                            int responseCode = conn.getResponseCode();
+                            if (responseCode == HttpURLConnection.HTTP_OK) {
+                                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                                String inputLine;
+                                StringBuilder response = new StringBuilder();
+
+                                while ((inputLine = in.readLine()) != null) {
+                                    response.append(inputLine);
+                                }
+                                in.close();
+
+                                runOnUiThread(() -> {
+                                    Toast.makeText(Register.this, response.toString(), Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(Register.this, Login.class);
+                                    startActivity(intent);
+                                    finish();
+                                });
+                            } else {
+                                runOnUiThread(() ->
+                                        Toast.makeText(Register.this, "Gagal mendaftar. Server error!", Toast.LENGTH_SHORT).show()
+                                );
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            runOnUiThread(() ->
+                                    Toast.makeText(Register.this, "Gagal koneksi ke server", Toast.LENGTH_SHORT).show()
+                            );
+                        }
+                    }).start();
                 }
             }
         });

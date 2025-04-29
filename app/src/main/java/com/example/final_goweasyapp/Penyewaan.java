@@ -26,6 +26,8 @@ public class Penyewaan extends AppCompatActivity {
     private String[] daftarSepeda = { "Sepeda Listrik", "Sepeda Gunung" };
     private int[] tarifPerJam    = { 50000,             20000         };
 
+    String idUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +64,9 @@ public class Penyewaan extends AppCompatActivity {
 
         // Kembali ke MainActivity ketika tombol KELUAR ditekan
         btnKeluar.setOnClickListener(v -> {
-            startActivity(new Intent(Penyewaan.this, MainActivity.class));
+            Intent intent = new Intent(Penyewaan.this, MainActivity.class);
+            intent.putExtra("is_logged_in", true);
+            startActivity(intent);
             finish();
         });
     }
@@ -86,6 +90,7 @@ public class Penyewaan extends AppCompatActivity {
         String sLama  = lamaSewa.getText().toString().trim();
         String sHarga = hargaMobil.getText().toString().trim();
         String sBayar = uangBayar.getText().toString().trim();
+        idUser = getIntent().getStringExtra("id_user");
 
         if (nama.isEmpty() || sLama.isEmpty() || sHarga.isEmpty() || sBayar.isEmpty()) {
             Toast.makeText(this, "Lengkapi semua data!", Toast.LENGTH_SHORT).show();
@@ -101,6 +106,7 @@ public class Penyewaan extends AppCompatActivity {
         }
 
         Intent intent = new Intent(Penyewaan.this, Struk.class);
+        intent.putExtra("id_user", idUser);
         intent.putExtra("nama", nama);
         intent.putExtra("jenis", daftarSepeda[spinnerSepeda.getSelectedItemPosition()]);
         intent.putExtra("lama", sLama);

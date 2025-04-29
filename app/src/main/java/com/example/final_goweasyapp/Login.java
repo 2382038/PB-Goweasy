@@ -12,6 +12,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
 public class Login extends AppCompatActivity {
 
     EditText editTextUsername, editTextPassword;
@@ -42,20 +51,59 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Username dan Password harus diisi", Toast.LENGTH_SHORT).show();
                 } else {
                     // Contoh validasi manual - nanti ganti cek server
-                    if (username.equals("admin") && password.equals("admin")) {
-                        SharedPreferences sharedPref = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString(KEY_USERNAME, username);
-                        editor.putBoolean(KEY_IS_LOGGED_IN, true);
-                        editor.apply();
+                    new Thread(() -> {
+                        try {
+                            URL url = new URL("http://10.8.14.82/android/goweasy/login.php");
 
-                        Toast.makeText(Login.this, "Login berhasil!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Login.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(Login.this, "Username atau Password salah", Toast.LENGTH_SHORT).show();
-                    }
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST");
+                            conn.setDoOutput(true);
+                            conn.setDoInput(true);
+
+                            String postData = "username=" + URLEncoder.encode(username, "UTF-8")
+                                    + "&password=" + URLEncoder.encode(password, "UTF-8");
+
+                            OutputStream os = conn.getOutputStream();
+                            os.write(postData.getBytes("UTF-8"));
+                            os.flush();
+                            os.close();
+
+                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                            StringBuilder response = new StringBuilder();
+                            String line;
+
+                            while ((line = br.readLine()) != null) {
+                                response.append(line);
+                            }
+
+                            br.close();
+
+                            JSONObject jsonResponse = new JSONObject(response.toString());
+
+                            String status = jsonResponse.getString("status");
+                            if (status.equals("success")) {
+                                String idUser = jsonResponse.getString("id");
+
+                                runOnUiThread(() -> {
+                                    Toast.makeText(Login.this, "Login berhasil!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(Login.this, MainActivity.class);
+                                    intent.putExtra("is_logged_in", true);
+                                    intent.putExtra("id_user", idUser); // <--- kirim id_user ke MainActivity
+                                    startActivity(intent);
+                                    finish();
+                                });
+                            } else {
+                                runOnUiThread(() -> {
+                                    Toast.makeText(Login.this, "Login gagal: " + jsonResponse.optString("message", ""), Toast.LENGTH_SHORT).show();
+                                });
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            runOnUiThread(() -> {
+                                Toast.makeText(Login.this, "Gagal terhubung ke server", Toast.LENGTH_SHORT).show();
+                            });
+                        }
+                    }).start();
                 }
             }
         });

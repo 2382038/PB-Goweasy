@@ -11,6 +11,8 @@ public class CariSepeda extends AppCompatActivity {
 
     ImageView btnBack;
 
+    String idUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +25,9 @@ public class CariSepeda extends AppCompatActivity {
 
     // Dipanggil saat tombol "Sewa Sekarang" diklik
     public void hal_sewa(View view) {
+        idUser = getIntent().getStringExtra("id_user");
         Intent intent = new Intent(CariSepeda.this, Penyewaan.class);
+        intent.putExtra("id_user", idUser);
         startActivity(intent);
     }
 }
